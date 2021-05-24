@@ -56,28 +56,21 @@ function addNewChar()
 {
   var formData = $( "form" ).serializeArray();
   formData = objectifyForm(formData);
-  //console.log(formData);
   var charName = formData["charname"];
   var faction = formData["faction"];
   var charClass = formData["class"];
-  //console.log(charName);
-  //console.log(faction);
-  //console.log(charClass);
   var idForNewChar = findFirstUnusedCharIdForFaction(faction);
   var key = transformIdToCharlistKey(faction, idForNewChar)
-  //console.log("new id: "+idForNewChar);
-  //console.log("new key: "+key);
+  var lang = localStorage.getItem(lang_key);
 
   if(charClass == "undefined" || charClass == null)
   {
-    //TODO de/en
-    alert("Bitte Klasse wählen.");
+    alert(msgChooseClass[lang]);
     return;
   }
   if(charName == "")
   {
-    //TODO de/en
-    alert("Bitte Namen eingeben.");
+    alert(msgEnterName[lang]);
     return;
   }
   

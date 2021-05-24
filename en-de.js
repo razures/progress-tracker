@@ -31,6 +31,9 @@ var faction_imp = {"de":"Sith-Imperium", "en":"The Sith Empire"};
 var save = {"de":"Speichern", "en":"Save"};
 var cancel = {"de":"Abbrechen", "en":"Cancel"};
 
+var msgChooseClass = {"de":"Bitte Klasse ausw\u00e4hlen.", "en":"Please choose a class."};
+var msgEnterName = {"de":"Bitte Name eingeben.", "en":"Please enter name."};
+                                                                                          
 var settingsTitle = {"de":"Einstellungen", "en":"Settings"}; 
 var editModeTitle = {"de":"Bearbeitungsmodus", "en":"Edit Mode"};
 var editModeText = {"de":"Bearbeitungsmodus \u00e4ndern", "en":"Change Edit Mode"};
