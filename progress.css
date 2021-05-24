@@ -1,0 +1,198 @@
+body {
+	background-color: #131313;
+	font: 16px Arial, sans-serif;
+	color: #d3d1ca;
+	margin: 20px;
+}
+a {
+	color: #CC9E42;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+h1 {
+	color: DE9427;
+}
+th, td {
+	padding: 8px 5px;
+	border-bottom: 1px dashed #363636;
+	text-align: center;
+	vertical-align: middle;
+}
+td img.faction {
+	height: 45px;
+	width: 45px;
+}
+td img.progress {
+	cursor: pointer;
+	height: 45px;
+	width: 45px;
+}
+td img.trash {
+	cursor: pointer;
+	height: 45px;
+	width: 45px;
+}
+th {
+	background-color: #242021;
+}
+table {
+	border: 1px solid #284747;
+	min-width: 450px;
+}
+tr:hover {
+	background-color: #284747;
+}
+#actionButtons div {
+	border: 1px solid #d3d1ca;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+	font-weight: bold;
+	background-color: #002c5a;
+	color: #d3d1ca;
+	padding: 5px 20px;
+}
+#actionButtons div:hover {
+	background-color: #053e7a;
+	text-decoration: none;
+	cursor: pointer;
+}
+#actionButtons div img {
+	height: 20px;
+	padding-right: 10px;
+}
+.hide {
+	display: none !important;
+}
+.overlay {
+	position: absolute;
+	width: 50%;
+	top: 10%;
+	left: 25%;
+	border: 2px solid #d3d1ca;
+	padding: 10px;
+	z-index: 2;
+	background-color: #131313;
+}
+.overlay .divRow, #actionButtons {
+	display: flex;
+}
+.overlay .divRow p {
+	flex: 100%;
+	border: 1px solid #d3d1ca;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+	font-weight: bold;
+	background-color: #002c5a;
+}
+.overlay .title {
+	justify-content: space-between;
+	margin: 5px;
+}
+.overlay .title h1 {
+	margin: 0px 5px;
+}
+.overlay .close a {
+	font-size: 24px;
+	font-weight: bold;
+	color: #d3d1ca;
+}
+.overlay .faction label {
+	flex: 50%;
+	border: 1px solid #d3d1ca;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+}
+#imp-classes, #rep-classes {
+	flex-wrap: wrap;
+}
+#imp-classes label, #rep-classes label {
+	flex: 1 0 20%;
+	border: 1px solid #d3d1ca;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+}
+.overlay .name {
+	border: 1px solid #d3d1ca;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+}
+.overlay .name span {
+	padding-top: 5px;
+}
+.overlay .name input {
+	margin-left: 10px;
+	font-size: 16px;
+}
+.overlay .add {
+	margin: 5px;
+	justify-content: flex-end;
+}
+.overlay .add input {
+	margin-left: 20px;
+	margin-top: 10px;
+	background-color: #002c5a;
+	border: 1px solid #d3d1ca;
+	padding: 10px 30px;
+	width: 150px;
+	color: #d3d1ca;
+}
+.overlay .add input:hover {
+	background-color: #053e7a;
+	cursor: pointer;
+}
+.overlay .add input.cancel {
+	background-color: #454545;
+}
+.overlay .add input.cancel:hover {
+	background-color: #6d6d6d;
+}
+.overlay .faction label img {
+	height: 45px;
+	width: 45px;
+	margin-bottom: 5px;
+}
+.overlay input[type=radio] {
+	display: none;
+}
+.overlay input[type="radio"]:checked+label {
+	font-weight: bold;
+	background-color: #454545;
+}
+.overlay input[type="radio"]+label:hover {
+	background-color: #6d6d6d;
+}
+.overlay .settingEntry {
+	border: 1px solid #d3d1ca;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+}
+.overlay .settingEntry:hover {
+	background-color: #6d6d6d;
+	cursor: pointer;
+}
+#tableDiv {
+	display: flex;
+	margin-left: -5px;
+	margin-right: -5px
+}
+#tableAnchor1, #tableAnchor2 {
+	padding: 5px;
+}
+#blockui {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	opacity: .5;
+	z-index: 1;
+}

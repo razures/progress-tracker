@@ -1,8 +1,147 @@
 <html>
   <head>
-    <title>Progress Tracker</title>
+    <title>SW:Tor Weekly Progress Tracker</title>
+  	<script src="jquery-3.6.0.min.js"></script>
+  	<script src="functions.js"></script>
+  	<script src="en-de.js"></script>
+  	<link rel="stylesheet" href="progress.css">
+  	<link rel="stylesheet" href="en-de.css">
   </head>
-  <body>
-    <p>Track Progress here</p>
+  <body id="razct_body">
+    <img src="logo.png">
+
+    <!-- content for title comes from css -->
+    <h1 class="pageTitle"></h1>  
+
+    <div id="tableDiv">  
+      <div id="tableAnchor1"></div>
+      <div id="tableAnchor2"></div>
+    </div>
+    
+    <div id="actionButtons">
+     <div onclick="toggleAddChar();" class="newCharButton"><img src="plus.png"><span></span></div>
+     <div onclick="reset();" class="resetButton"><img src="reset.png"><span></span></div>
+     <div onclick="toggleSettings();" class="settingsButton"><img src="settings.png"><span></span></div>
+    </div>
+  
+    <p><a href="javascript:toggleLang();"><img id="lang_toggle" class="lang" src="trans.gif"></a></p>
+  
+  <!-- overlay div for new characters -->
+  <div id="newCharOverlay" class="overlay hide">
+    <div class="divRow title">
+      <h1 id="newCharTitle">Add Character</h1>
+      <span class="close"><a href="javascript:toggleAddChar();">X</a></span>
+    </div>
+        <form>
+          <div class="divRow">
+            <p id="factionTitle">Faction</p>
+          </div>
+          <div class="divRow faction">
+            <input type="radio" name="faction" id="imp" value="imp" checked>
+            <label for="imp"><img src="imp.png"><br><span id="faction_imp">The Sith Empire</span></label>
+            
+            <input type="radio" name="faction" id="rep" value="rep">
+            <label for="rep"><img src="rep.png"><br><span id="faction_rep">The Galactic Republic</span></label><br>
+          </div>
+          <div class="divRow">
+            <p id="classTitle">Class</p>
+          </div>
+
+          <div id="imp-classes" class="divRow">
+            <input type="radio" name="class" id="juggernaut" value="juggernaut">
+            <label for="juggernaut">Sith Juggernaut</label><br>
+
+            <input type="radio" name="class" id="marauder" value="marauder">
+            <label for="marauder">Sith Marauder</label><br>
+
+            <input type="radio" name="class" id="sorcerer" value="sorcerer">
+            <label for="sorcerer">Sith Sorcerer</label><br>
+
+            <input type="radio" name="class" id="assassin" value="assassin">
+            <label for="assassin">Sith Assassin</label><br>
+
+            <input type="radio" name="class" id="powertech" value="powertech">
+            <label for="powertech">Powertech</label><br>
+            
+            <input type="radio" name="class" id="mercenary" value="mercenary">
+            <label for="mercenary">Mercenary</label><br>
+
+            <input type="radio" name="class" id="operative" value="operative">
+            <label for="operative">Operative</label><br>
+          
+            <input type="radio" name="class" id="sniper" value="sniper">
+            <label for="sniper">Sniper</label><br>
+          </div>
+          
+          <div id="rep-classes" class="divRow hide">
+            <input type="radio" name="class" id="guardian" value="guardian">
+            <label for="guardian">Jedi Guardian</label><br>
+
+            <input type="radio" name="class" id="sentinel" value="sentinel">
+            <label for="sentinel">Jedi Sentinel</label><br>
+
+            <input type="radio" name="class" id="sage" value="sage">
+            <label for="sage">Jedi Sage</label><br>
+
+            <input type="radio" name="class" id="shadow" value="shadow">
+            <label for="shadow">Jedi Shadow</label><br>
+
+            <input type="radio" name="class" id="gunslinger" value="gunslinger">
+            <label for="gunslinger">Gunslinger</label><br>
+
+            <input type="radio" name="class" id="scoundrel" value="scoundrel">
+            <label for="scoundrel">Scoundrel</label><br>
+
+            <input type="radio" name="class" id="commando" value="commando">
+            <label for="commando">Commando</label><br>
+
+            <input type="radio" name="class" id="vanguard" value="vanguard">
+            <label for="vanguard">Vanguard</label><br>
+          </div>
+
+          <div class="divRow">
+            <p>Name</p>
+          </div>
+          <div class="divRow name">
+            <span>Name:</span><input type="text" name="charname" id="charname" value="">
+          </div>
+          
+          <div class="divRow add">
+            <input id="cancelButton" class="cancel" type="button" onclick="toggleAddChar();" value="Cancel">
+            <input id="saveButton" type="button" onclick="addNewChar();" value="Save">
+          </div>
+        </form>
+  </div>
+  
+  <!-- overlay div for settings -->
+  <div id="settingsOverlay" class="overlay hide">
+    <div class="divRow title">
+      <h1 id="settingsTitle">Settings</h1>
+      <span class="close"><a href="javascript:toggleSettings();">X</a></span>
+    </div>
+    
+    <div class="divRow">
+      <p id="editModeTitle">Edit Mode</p>
+    </div>
+    <div id="editModeText" class="divRow settingEntry" onclick="toggleEditMode();">Change Edit Mode</div>
+    
+    <div class="divRow">
+      <p id="divideModeTitle">Divide Mode</p>
+    </div>
+    <div id="divideModeText" class="divRow settingEntry" onclick="toggleDivideTable();">Change Divide Mode</div>
+
+    <div class="divRow">
+      <p id="factionOrderTitle">Faction Order</p>
+    </div>
+    <div id="factionOrderText" class="divRow settingEntry" onclick="toggleFactionOrder();">Change Faction Order</div>
+
+    <div class="divRow add">
+      <input id="closeSettingsButton" class="cancel" type="button" onclick="toggleSettings();" value="Close">
+    </div>
+  </div>
+  
+  <div id="blockui" class="hide"></div>
+  <p>&copy;	raz</p>
+
   </body>
 </html>
