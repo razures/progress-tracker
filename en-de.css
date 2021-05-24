@@ -5,13 +5,13 @@ body.en .pageTitle::before {
 	content: "Weekly Conquest Tracker";
 }
 body.de #actionButtons .newCharButton span:before {
-	content: "Charakter hinzufügen";
+	content: "Charakter hinzuf\u00fcgen";
 }
 body.en #actionButtons .newCharButton span:before {
 	content: "Add Character";
 }
 body.de #actionButtons .resetButton span:before {
-	content: "Alle zurücksetzen";
+	content: "Alle zur\u00fccksetzen";
 }
 body.en #actionButtons .resetButton span:before {
 	content: "Reset all";
