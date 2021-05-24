@@ -379,6 +379,7 @@ function addChangeEventToFactionSelect()
 
 function toggleAddChar()
 {
+  scrollTop();
   translateAddCharOverlay();
   $( "#blockui" ).toggleClass( "hide" );
   $( "#newCharOverlay" ).toggleClass( "hide" );
@@ -386,6 +387,7 @@ function toggleAddChar()
 
 function toggleSettings()
 {
+  scrollTop();
   translateSettingsOverlay();
   $( "#blockui" ).toggleClass( "hide" );
   $( "#settingsOverlay" ).toggleClass( "hide" );
@@ -470,12 +472,12 @@ function translateAddCharOverlay()
   
   // translate class labels
   $( "#imp-classes > label" ).each(function() {
-    console.log(this.attributes.for.value);
+    //console.log(this.attributes.for.value);
     $(this).text(classNames[this.attributes.for.value][lang]);
   });
 
   $( "#rep-classes > label" ).each(function() {
-    console.log(this.attributes.for.value);
+    //console.log(this.attributes.for.value);
     $(this).text(classNames[this.attributes.for.value][lang]);
   });
   
@@ -496,4 +498,11 @@ function translateSettingsOverlay()
   $( "#factionOrderText" ).text(factionOrderText[lang]);
   
   $( "#closeSettingsButton" ).val(closeButton[lang]);
+}
+
+function scrollTop()
+{
+  $('body,html').animate({
+				scrollTop: 0
+			}, 0);
 }
