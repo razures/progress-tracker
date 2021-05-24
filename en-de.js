@@ -18,17 +18,8 @@ var classNamesJson = `{
         "vanguard" : {"de":"Frontk\u00e4mpfer", "en":"Vanguard"}
     }`;
 
-//className[class][lang]
 var classNames = JSON.parse(classNamesJson); 
 
-/*
-console.log(classNames["juggernaut"]["de"]);
-console.log(classNames["marauder"]["en"]);
-console.log(classNames["sniper"]["de"]);
-console.log(classNames["vanguard"]["de"]);
-*/
-
-// table header
 var th_faction = {"de":"Fraktion", "en":"Faction"};
 var th_class = {"de":"Klasse", "en":"Class"};
 var th_progress = {"de":"Erledigt", "en":"Progress done"};
