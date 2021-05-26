@@ -24,7 +24,8 @@ function initConfig()
   // init lang  
   var langVal = localStorage.getItem(lang_key);
   if (langVal === null) {
-    localStorage.setItem(lang_key, default_lang);
+	var browserLang = getBrowserLang();
+    localStorage.setItem(lang_key, browserLang);
   }
 
   // init last reset
@@ -132,7 +133,6 @@ function generateHtmlTableFromStorage()
 
 function generateDividedHtmlTableFromStorage()
 {
-  var editMode = localStorage.getItem(edit_mode_key);
   var orderFaction = localStorage.getItem(faction_order_key);
 
   var firstFaction = orderFaction;
@@ -178,10 +178,7 @@ function generateDividedHtmlTableFromStorage()
 
 function generateMergedHtmlTableFromStorage()
 {
-  var editMode = localStorage.getItem(edit_mode_key);
   var orderFaction = localStorage.getItem(faction_order_key);
-  
-  var lang = localStorage.getItem(lang_key);
   
   //access the prefered language text from array, lang = en/de
   //console.log(th_faction[lang]);
@@ -421,7 +418,7 @@ function findFirstUnusedCharIdForFaction(faction)
     currentId++;
   }
   
-  //console.log("kleinste freie Id für "+faction+": "+currentId);
+  //console.log("kleinste freie Id fï¿½r "+faction+": "+currentId);
   return currentId;
 }
 
@@ -502,7 +499,52 @@ function translateSettingsOverlay()
 
 function scrollTop()
 {
-  $('body,html').animate({
-				scrollTop: 0
-			}, 0);
+  $('body,html').animate({scrollTop: 0}, 0);
 }
+
+function getBrowserLang()
+{
+	var shortLang;
+	
+	try {
+		var lang = window.navigator.languages ? window.navigator.languages[0] : null;
+		lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
+
+		var shortLang = lang;
+		if (shortLang.indexOf('-') !== -1)
+		{
+    		shortLang = shortLang.split('-')[0];
+		}
+		if (shortLang.indexOf('_') !== -1)
+		{
+    		shortLang = shortLang.split('_')[0];
+		}
+	}
+	catch (e) {
+   		console.error(e);
+		return default_lang;
+	}
+	return shortLang;
+}
+
+/*
+function startTimer()
+{
+	console.log("start timer");
+  // 1. init
+      var date = new Date();	
+      var nowHour = date.getHours();
+      var nowMin = date.getMinutes();
+      var nowSec = date.getSeconds();
+	console.log("time: "+nowHour+":"+nowMin+":"+nowSec);
+
+	  $( "#timer" ).text("Zeit: "+nowHour+":"+nowMin+":"+nowSec);
+  // 2. loop updateTimer()
+}
+
+function updateTimer()
+{
+  var timer ="";
+  $( "#timer" ).text(timer);
+}
+*/

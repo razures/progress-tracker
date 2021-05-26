@@ -6,12 +6,17 @@
   	<script src="en-de.js"></script>
   	<link rel="stylesheet" href="progress.css">
   	<link rel="stylesheet" href="en-de.css">
+  	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   </head>
   <body id="razct_body">
-    <img src="logo.png">
-
-    <!-- content for title comes from css -->
-    <h1 class="pageTitle"></h1>  
+    <div class="header">
+      <img src="logo.png">
+      <!-- content for title comes from css -->
+      <div class="headerRight">
+        <h1 class="pageTitle"></h1>
+        <!-- <div class="timerFrame"><span id="nextResetLabel">Next reset: </span><span id="timer">dd:hh:mm:ss</span></div> -->
+      </div>
+    </div>
 
     <div id="tableDiv">  
       <div id="tableAnchor1"></div>
@@ -25,6 +30,8 @@
     </div>
   
     <p><a href="javascript:toggleLang();"><img id="lang_toggle" class="lang" src="trans.gif"></a></p>
+    
+    <!-- <p><a href="javascript:startTimer();">start timer</a></p> -->
   
   <!-- overlay div for new characters -->
   <div id="newCharOverlay" class="overlay hide">

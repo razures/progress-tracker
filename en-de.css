@@ -1,5 +1,5 @@
 body.de .pageTitle::before {
-	content: "Eroberungsfortschritt";
+	content: "Erorberungsfortschritt";
 }
 body.en .pageTitle::before {
 	content: "Weekly Conquest Tracker";

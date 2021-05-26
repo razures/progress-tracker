@@ -44,15 +44,25 @@ table {
 tr:hover {
 	background-color: #284747;
 }
+.header {
+  display: flex;
+}
+.headerRight {
+  flex-direction: row;
+}
+.timerFrame {
+	border: 1px solid #d3d1ca;
+	margin: 5px;
+	padding: 5px;
+}
 #actionButtons div {
 	border: 1px solid #d3d1ca;
-	padding: 10px;
 	margin: 5px;
+	padding: 5px 20px;
 	text-align: center;
 	font-weight: bold;
 	background-color: #002c5a;
 	color: #d3d1ca;
-	padding: 5px 20px;
 }
 #actionButtons div:hover {
 	background-color: #053e7a;
