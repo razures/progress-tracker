@@ -17,6 +17,7 @@ $( document ).ready(function() {
 
     // show Table
     generateHtmlTableFromStorage();
+	startTimer();
 });
 
 function initConfig()
@@ -244,20 +245,20 @@ function getCharTableRows(faction)
     {
         var nextItem = JSON.parse(localStorage.getItem(key));
         
-        var progressImg = "undone.png";
+        var progressImg = "images/undone.png";
         if(nextItem.progress_done == "true")
         {
-          progressImg = "done.png";
+          progressImg = "images/done.png";
         }
         
         //var nextTableRow = '<tr><td>' + nextItem.number + '</td><td>' + nextItem.name + '</td><td class="td' + nextItem.faction + '">' + nextItem.faction + '</td><td>' + nextItem.class + '</td><td onclick="toggleProgress(\'' + nextItem.id + '\');">' + nextItem.progress_done + '</td>';
         //var nextTableRow = '<tr><td>' + nextItem.number + '</td><td>' + nextItem.name + '</td><td><img src="' + nextItem.faction + '.png"></td><td>' + nextItem.class + '</td><td onclick="toggleProgress(\'' + nextItem.id + '\');">' + nextItem.progress_done + '</td>';
         //var nextTableRow = '<tr><td>' + nextItem.number + '</td><td>' + nextItem.name + '</td><td><img class="faction" src="' + nextItem.faction + '.png"></td><td>' + nextItem.class + '</td><td onclick="toggleProgress(\'' + nextItem.id + '\');"><img class="progress" src="' + progressImg + '"></td>';
-        var nextTableRow = '<tr><td>' + nextItem.number + '</td><td>' + nextItem.name + '</td><td><img class="faction" src="' + nextItem.faction + '.png"></td><td>' + classNames[nextItem.class][lang] + '</td><td onclick="toggleProgress(\'' + nextItem.id + '\');"><img class="progress" src="' + progressImg + '"></td>';
+        var nextTableRow = '<tr><td>' + nextItem.number + '</td><td>' + nextItem.name + '</td><td><img class="faction" src="images/' + nextItem.faction + '.png"></td><td>' + classNames[nextItem.class][lang] + '</td><td onclick="toggleProgress(\'' + nextItem.id + '\');"><img class="progress" src="' + progressImg + '"></td>';
         
         if(editMode == "true")
         {
-          nextTableRow += '<td onclick="remove(\''+nextItem.id+'\')"><img class="trash" src="trash.png"></td>';
+          nextTableRow += '<td onclick="remove(\''+nextItem.id+'\')"><img class="trash" src="images/trash.png"></td>';
         }
         
         nextTableRow += '</tr>';
@@ -444,7 +445,7 @@ function getOtherFaction(faction)
   if (faction == "imp")
   {
     return "rep";
-  } else if (faction== "rep")
+  } else if (faction == "rep")
   {
     return "imp";
   }
@@ -527,24 +528,76 @@ function getBrowserLang()
 	return shortLang;
 }
 
-/*
 function startTimer()
 {
-	console.log("start timer");
-  // 1. init
-      var date = new Date();	
-      var nowHour = date.getHours();
-      var nowMin = date.getMinutes();
-      var nowSec = date.getSeconds();
-	console.log("time: "+nowHour+":"+nowMin+":"+nowSec);
-
-	  $( "#timer" ).text("Zeit: "+nowHour+":"+nowMin+":"+nowSec);
-  // 2. loop updateTimer()
+	setInterval(function() {
+		updateTimer();
+	}, 1000);		
 }
 
 function updateTimer()
 {
-  var timer ="";
-  $( "#timer" ).text(timer);
+	var now = new Date();
+	var nextReset = getDateOfNextReset();
+	var differenceMS = nextReset - now;
+	var difference = convertMS(differenceMS);
+	var d = difference["d"];
+	var h = difference["h"];
+	var m = difference["m"];
+	var s = difference["s"];
+	
+	$( "#timer" ).text(d+"d "+h+":"+m+":"+s);
 }
-*/
+
+function convertMS(ms) {
+	var d, h, m, s;
+	s = Math.floor(ms / 1000);
+	m = Math.floor(s / 60);
+	s = s % 60;
+	h = Math.floor(m / 60);
+	m = m % 60;
+	d = Math.floor(h / 24);
+	h = h % 24;
+	var pad = function (n) { return n < 10 ? '0' + n : n; };
+	var result = {"d":d, "h":pad(h),"m":pad(m),"s":pad(s)};
+	return result;
+}
+
+function getDateOfNextReset()
+{
+	//next reset is tuesdays 12:00 UTC = 14:00 CET
+	var now = new Date();
+	var nextReset = new Date();
+	var day = now.getDay();
+	//console.log(now.toUTCString());
+	
+	// Tuesday : 2
+	if(day == 2)
+	{
+		console.log("tuesday");
+
+		var hours = now.getUTCHours();
+		// before 12 o'clock -> reset today
+		if(hours < 12)
+		{
+			nextReset = date;
+		} else {
+		// after 12 o'clock -> reset in one week
+			nextReset.setDate(nextReset.getDate() + 7);
+		}
+	}
+	else
+	{
+		//console.log("not tuesday");
+		// find next tuesday after now
+		nextReset.setDate(now.getDate() + (7-now.getDay())%7+2);
+	}
+	
+	nextReset.setUTCHours(12);
+	nextReset.setUTCMinutes(0);
+	nextReset.setUTCSeconds(0);
+	nextReset.setUTCMilliseconds(0);
+	
+	//console.log("nextReset: "+nextReset.toUTCString());
+    return nextReset;
+}

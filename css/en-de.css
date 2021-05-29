@@ -4,6 +4,12 @@ body.de .pageTitle::before {
 body.en .pageTitle::before {
 	content: "Weekly Conquest Tracker";
 }
+body.de .timerLabel::before {
+	content: "Neue Eroberung startet in: ";
+}
+body.en .timerLabel::before {
+	content: "New Conquest starts in: ";
+}
 body.de #actionButtons .newCharButton span:before {
 	content: "Charakter  hinzuf\00fcgen";
 }
@@ -25,10 +31,10 @@ body.en #actionButtons .settingsButton span:before {
 body.de .lang {
 	width: 41px;
 	height: 28px;
-	background: url(de-en.png) 0 0;
+	background: url(../images/de-en.png) 0 0;
 }
 body.en .lang {
 	width: 41px;
 	height: 28px;
-	background: url(de-en.png) -41px 0;
+	background: url(../images/de-en.png) -41px 0;
 }

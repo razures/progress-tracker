@@ -55,6 +55,11 @@ tr:hover {
 	margin: 5px;
 	padding: 5px;
 }
+#timer {
+	font-weight: bold;
+	/* color: #03e13e; */
+	color: #CC9E42;
+}
 #actionButtons div {
 	border: 1px solid #d3d1ca;
 	margin: 5px;
