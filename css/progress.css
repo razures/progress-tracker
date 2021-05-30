@@ -52,6 +52,7 @@ tr:hover {
 }
 .timerFrame {
 	border: 1px solid #d3d1ca;
+	background-color: #454545;
 	margin: 5px;
 	padding: 5px;
 }

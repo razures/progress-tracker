@@ -12,12 +12,12 @@ $( document ).ready(function() {
     initConfig();
     disableFormSubmit();
     addChangeEventToFactionSelect()
-    //generateHtmlTableFromStorage();
     setLangClassToBody()
 
     // show Table
     generateHtmlTableFromStorage();
-	//startTimer();
+	
+	startTimer();
 });
 
 function initConfig()
@@ -425,12 +425,7 @@ function findFirstUnusedCharIdForFaction(faction)
 
 function transformIdToCharlistKey(faction, id)
 {
-  if(id < 10)
-  {
-    id = "0" + id;
-  }
-
-  return prefix_charlist + faction + '_' + id;
+  return prefix_charlist + faction + '_' + pad(id);
 }
 
 function saveNewCharToLocalStorage(id, number, charName, faction, charClass)
@@ -538,7 +533,7 @@ function startTimer()
 function updateTimer()
 {
 	var now = new Date();
-	var nextReset = getDateOfNextReset();
+	var nextReset = getDateOfNextReset(now);
 	var differenceMS = nextReset - now;
 	var difference = convertMS(differenceMS);
 	var d = difference["d"];
@@ -546,7 +541,15 @@ function updateTimer()
 	var m = difference["m"];
 	var s = difference["s"];
 	
-	$( "#timer" ).text(d+"d "+h+":"+m+":"+s);
+	var output = "";
+	// days only if more than one day left
+	if (d > 0)
+	{
+		output += d+"d "; 
+	}
+	output += h+":"+m+":"+s;
+	
+	$( "#timer" ).text(output);
 }
 
 function convertMS(ms) {
@@ -558,40 +561,37 @@ function convertMS(ms) {
 	m = m % 60;
 	d = Math.floor(h / 24);
 	h = h % 24;
-	var pad = function (n) { return n < 10 ? '0' + n : n; };
 	var result = {"d":d, "h":pad(h),"m":pad(m),"s":pad(s)};
 	return result;
 }
 
-function getDateOfNextReset()
+function getDateOfNextReset(date)
 {
-	//next reset is tuesdays 12:00 UTC = 14:00 CET
-	var now = new Date();
-	var nextReset = new Date();
-	var day = now.getUTCDay();
-	console.log(now.toUTCString());
+	//next reset is tuesdays 12:00 UTC
+	var nextReset = new Date(date);
+	var day = date.getUTCDay();
 	
 	// Tuesday : 2
 	if(day == 2)
 	{
-		console.log("tuesday");
-
-		var hours = now.getUTCHours();
-		console.log(hours);
-		// before 12 o'clock -> reset today
-		if(hours < 12)
+		var hours = date.getUTCHours();
+		
+		// before 12 o'clock -> reset today - do nothing
+		// after 12 o'clock -> reset 7 days later
+		if(hours >= 12)
 		{
-			nextReset = date;
-		} else {
-		// after 12 o'clock -> reset in one week
-			nextReset.setDate(nextReset.getDate() + 7);
+			nextReset.setDate(date.getDate() + 7);
 		}
 	}
 	else
 	{
-		console.log("not tuesday");
 		// find next tuesday after now
-		nextReset.setDate(now.getDate() + (7-now.getDay())%7);
+		while (day != 2)
+		{	
+			// increase day by 1
+			nextReset.setDate(nextReset.getDate()+1);
+			day = nextReset.getUTCDay();
+		}
 	}
 	
 	nextReset.setUTCHours(12);
@@ -599,6 +599,11 @@ function getDateOfNextReset()
 	nextReset.setUTCSeconds(0);
 	nextReset.setUTCMilliseconds(0);
 	
-	console.log("nextReset: "+nextReset.toUTCString());
-    return nextReset;
+	//console.log("next reset for date: "+date.toUTCString() +" -> "+" "+nextReset.toUTCString());
+	return nextReset;
+}
+
+function pad(n)
+{
+	return n < 10 ? '0' + n : n;
 }
