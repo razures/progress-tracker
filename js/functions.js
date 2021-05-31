@@ -17,7 +17,7 @@ $( document ).ready(function() {
 
     // show Table
     generateHtmlTableFromStorage();
-	startTimer();
+	//startTimer();
 });
 
 function initConfig()
@@ -568,8 +568,8 @@ function getDateOfNextReset()
 	//next reset is tuesdays 12:00 UTC = 14:00 CET
 	var now = new Date();
 	var nextReset = new Date();
-	var day = now.getDay();
-	//console.log(now.toUTCString());
+	var day = now.getUTCDay();
+	console.log(now.toUTCString());
 	
 	// Tuesday : 2
 	if(day == 2)
@@ -577,6 +577,7 @@ function getDateOfNextReset()
 		console.log("tuesday");
 
 		var hours = now.getUTCHours();
+		console.log(hours);
 		// before 12 o'clock -> reset today
 		if(hours < 12)
 		{
@@ -588,9 +589,9 @@ function getDateOfNextReset()
 	}
 	else
 	{
-		//console.log("not tuesday");
+		console.log("not tuesday");
 		// find next tuesday after now
-		nextReset.setDate(now.getDate() + (7-now.getDay())%7+2);
+		nextReset.setDate(now.getDate() + (7-now.getDay())%7);
 	}
 	
 	nextReset.setUTCHours(12);
@@ -598,6 +599,6 @@ function getDateOfNextReset()
 	nextReset.setUTCSeconds(0);
 	nextReset.setUTCMilliseconds(0);
 	
-	//console.log("nextReset: "+nextReset.toUTCString());
+	console.log("nextReset: "+nextReset.toUTCString());
     return nextReset;
 }
