@@ -6,19 +6,26 @@ var faction_order_key = 'razct_faction_order';
 var edit_mode_key = 'razct_editmode';
 var prefix_charlist = 'razct_char_';
 var default_lang = 'de';
+var prefix_razct = 'razct_';
 
 // init page with saved data from localstorage
 $( document ).ready(function() {
+	pageReady();
+});
+
+function pageReady()
+{
     initConfig();
     disableFormSubmit();
-    addChangeEventToFactionSelect()
-    setLangClassToBody()
+    addChangeEventToFactionSelect();
+	addChangeEventToImportInput();
+    setLangClassToBody();
 
     // show Table
     generateHtmlTableFromStorage();
 	
 	startTimer();
-});
+}
 
 function initConfig()
 {
@@ -606,4 +613,78 @@ function getDateOfNextReset(date)
 function pad(n)
 {
 	return n < 10 ? '0' + n : n;
+}
+
+function exportTrackerData()
+{
+	/* dump local storage to string */
+	var a = {};
+  	for (var i = 0; i < localStorage.length; i++) {
+    	var k = localStorage.key(i);
+    	var v = localStorage.getItem(k);
+		if(k.startsWith(prefix_razct))
+		{
+    		a[k] = v;
+		}
+  	}
+
+	/* save as blob */
+	var textToSave = JSON.stringify(a);
+	var textToSaveAsBlob = new Blob([textToSave], { type: "text/plain" });
+	var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+
+	/* download without button hack */
+	var filename = getFilenameForExport();
+	var downloadLink = document.createElement("a");
+	downloadLink.download = filename;
+	downloadLink.innerHTML = "Download File";
+	downloadLink.href = textToSaveAsURL;
+	downloadLink.onclick = function () {
+		document.body.removeChild(event.target);
+	};
+	downloadLink.style.display = "none";
+	document.body.appendChild(downloadLink);
+	downloadLink.click();
+}
+
+function getFilenameForExport()
+{
+	var date = new Date();
+	return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()) + "-progress-tracker-export.txt";
+}
+
+function importTrackerData()
+{
+	$( "#importInput" ).trigger("click");
+}
+
+function addChangeEventToImportInput()
+{
+  $( "#importInput" ).change(function() {
+	var files = $( "#importInput" ).prop("files");
+  	if (files.length <= 0)
+	{
+		// no file selected
+    	return false;
+  	}
+  
+	var fr = new FileReader();
+	fr.onload = function(e) { 
+    	var result = JSON.parse(e.target.result);
+		saveJsonInLocalStorage(result);
+  	}
+	fr.readAsText(files.item(0));
+  });
+}
+
+function saveJsonInLocalStorage(json)
+{
+	Object.keys(json).forEach(function(key) {
+		if(key.startsWith(prefix_razct))
+		{
+			localStorage.setItem(key, json[key]);		
+		}
+  	});
+	//reinit page after import
+	pageReady();
 }

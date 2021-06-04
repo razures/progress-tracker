@@ -24,13 +24,17 @@
     </div>
     
     <div id="actionButtons">
-     <div onclick="toggleAddChar();" class="newCharButton"><img src="images/plus.png"><span></span></div>
-     <div onclick="reset();" class="resetButton"><img src="images/reset.png"><span></span></div>
-     <div onclick="toggleSettings();" class="settingsButton"><img src="images/settings.png"><span></span></div>
+		<div onclick="toggleAddChar();" class="newCharButton"><img src="images/plus.png"><span></span></div>
+		<div onclick="reset();" class="resetButton"><img src="images/reset.png"><span></span></div>
+		<div onclick="exportTrackerData();" class="exportButton"><img src="images/export.png"><span></span></div>
+		<div onclick="importTrackerData();" class="importButton"><img src="images/import.png"><span></span></div>
+		<div onclick="toggleSettings();" class="settingsButton"><img src="images/settings.png"><span></span></div>
     </div>
   
+	<!-- invisible file input for import function -->
+	<p><input id="importInput" class="hide" type="file" onchange="changeImportInput()" /></p>
+	
     <p><a href="javascript:toggleLang();"><img id="lang_toggle" class="lang" src="images/trans.gif"></a></p>
-
   
   <!-- overlay div for new characters -->
   <div id="newCharOverlay" class="overlay hide">

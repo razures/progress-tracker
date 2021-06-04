@@ -19,6 +19,12 @@ body.en #actionButtons .newCharButton span:before {
 body.de #actionButtons .resetButton span:before {
 	content: "Alle zur\00fc""cksetzen";
 }
+body.en #actionButtons .exportButton span:before, body.de #actionButtons .exportButton span:before {
+	content: "Export";
+}
+body.en #actionButtons .importButton span:before, body.de #actionButtons .importButton span:before {
+	content: "Import";
+}
 body.en #actionButtons .resetButton span:before {
 	content: "Reset all";
 }
